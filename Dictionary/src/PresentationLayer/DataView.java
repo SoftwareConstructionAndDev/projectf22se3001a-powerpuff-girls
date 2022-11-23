@@ -13,10 +13,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import BusinessLogicLayer.DictionaryBLL;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 public class DataView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -48,7 +50,12 @@ public class DataView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 414, 222);
+		contentPane.add(scrollPane);
+		
 		table = new JTable();
+		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -58,14 +65,12 @@ public class DataView extends JFrame {
 		));
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
-		table.setBounds(10, 11, 414, 222);
-		contentPane.add(table);
+		
+		DefaultTableModel tableModel=(DefaultTableModel) table.getModel();
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(407, 11, 17, 222);
 		contentPane.add(scrollBar);
-		
-		DefaultTableModel tableModel=(DefaultTableModel) table.getModel();
 		DictionaryBLL dbll=new DictionaryBLL();
 		LinkedList<String[]> list=dbll.getDataFromDb();
 		for(int i=0;i<list.size();i++)

@@ -77,9 +77,7 @@ public class DataBaseHandler {
 	public void insertData(LinkedList<String[]>list) throws SQLException
 	{
 		Connection con=connectDb();
-		//String query="create table لغت if not exists(رقم int(11) AUTO_INCREMENT PRIMARY KEY,مشکول text, صنف text, أصل text, جنس text, عدد text, معانی text, غیرمشکول text, غیرأصل text );";
 		
-        //st.executeQuery(query);
         for(int i=1;i<list.size();i++)
         {
         	String[] word=list.get(i);
@@ -91,9 +89,30 @@ public class DataBaseHandler {
         	String many="-";
         	String gm=generateUnVocalizedForm(word[1]);
         	String gs=generateUnVocalizedForm(word[3]);
-        	String query="INSERT INTO `لغت`( `مشکول`, `صنف`, `أصل`, `جنس`, `عدد`, `معانی`, `غیرمشکول`, `غیرأصل`) VALUES ('"+mashkool+"','"+sinf+"','"+asl+"','"+jins+"','"+adad+"','"+many+"','"+gm+"','"+gs+"')";
+        	String query="INSERT INTO `لغت`( `مشكول`, `صنف`, `أصل`, `جنس`, `عدد`, `معانی`, `غیرمشکول`, `غیرأصل`) VALUES ('"+mashkool+"','"+sinf+"','"+asl+"','"+jins+"','"+adad+"','"+many+"','"+gm+"','"+gs+"')";
+        	String query2="INSERT INTO `foreignkeytable`(`اصل`) VALUES ('"+asl+"');";
+        	String selQry="Select * from foreignkeytable;";
+        	Statement st1=con.createStatement();
+        	 ResultSet rs = st1.executeQuery(selQry);
+        	 boolean found=false;
+        	 while(rs.next())
+        	 {
+        		 if (asl.equals(rs.getString(1))) {
+        			 found=true;
+            		 break;
+        		 }
+        		
+        	 }
+        	 if(!found)
+        	 {
+        		 PreparedStatement st2 = con.prepareStatement(query);
+               	 st2.executeUpdate(query2); 
+        	 }
+        	
         	PreparedStatement st = con.prepareStatement(query);
         	 st.executeUpdate(query);
+        	 
+        	 
         	
         }
 		

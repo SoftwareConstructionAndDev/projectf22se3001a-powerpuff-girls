@@ -71,7 +71,8 @@ public class AdminOptions extends JFrame {
 						JOptionPane.showMessageDialog(null, "ایکسیپشن IO");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+						//JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+						e1.printStackTrace();
 					}					
 				}
 			}
