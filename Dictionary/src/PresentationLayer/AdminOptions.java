@@ -42,9 +42,10 @@ public class AdminOptions extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
 	
-	public AdminOptions() {
+	public AdminOptions() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,9 +63,10 @@ public class AdminOptions extends JFrame {
 				fc.setFileFilter(fileFilter);
 				int fileChosen=fc.showOpenDialog(null);
 				if(fileChosen==JFileChooser.APPROVE_OPTION) {
-					File file=new File(fc.getSelectedFile().getAbsolutePath());
-					DictionaryBLL dbll=new DictionaryBLL();
+					
 					try {
+						File file=new File(fc.getSelectedFile().getAbsolutePath());
+						DictionaryBLL dbll=new DictionaryBLL();
 						dbll.importFiles(file);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

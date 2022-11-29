@@ -32,9 +32,9 @@ public class DataBaseHandler {
 	 * @return
 	 * @throws SQLException
 	 */
-	public  ArrayList<String> getLoginData() throws SQLException
+	public  ArrayList<String> getLoginData(Connection con) throws SQLException
 	{
-		Connection con=connectDb();
+		//Connection con=connectDb();
 		String query="Select * from login";
 		Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -74,10 +74,12 @@ public class DataBaseHandler {
 	 * @param list
 	 * @throws SQLException
 	 */
-	public void insertData(LinkedList<String[]>list) throws SQLException
+	public void insertData(LinkedList<String[]>list, Connection con) throws SQLException
 	{
-		Connection con=connectDb();
+		//Connection con=connectDb();
+		//String query="create table لغت if not exists(رقم int(11) AUTO_INCREMENT PRIMARY KEY,مشکول text, صنف text, أصل text, جنس text, عدد text, معانی text, غیرمشکول text, غیرأصل text );";
 		
+        //st.executeQuery(query);
         for(int i=1;i<list.size();i++)
         {
         	String[] word=list.get(i);
@@ -117,9 +119,9 @@ public class DataBaseHandler {
         }
 		
 	}
-	public LinkedList<String[]> getDicData() throws SQLException
+	public LinkedList<String[]> getDicData(Connection con) throws SQLException
 	{
-		Connection con=connectDb();
+		//Connection con=connectDb();
 		String query="Select * from لغت";
 		Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);	
