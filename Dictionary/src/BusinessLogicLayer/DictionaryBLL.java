@@ -10,10 +10,13 @@ import java.util.LinkedList;
 
 import DataAccessLayer.DataBaseConnection;
 import DataAccessLayer.DataBaseHandler;
+import DataAccessLayer.Facade;
+
 
 public class DictionaryBLL {
 	private  LinkedList<String[]>listOfWords=new LinkedList<String[]>();
 	private static Connection con;
+	private  Facade facade=new Facade();
 	public DictionaryBLL() throws SQLException{con=DataBaseConnection.getConnection();}
 	/**
 	 * @author Saliha Shahid
@@ -34,8 +37,8 @@ public void importFiles(File file) throws IOException, SQLException
 		listOfWords.add(word);
 		
 	}
-	DataBaseHandler dbh=new DataBaseHandler();
-	dbh.insertData(listOfWords,con);
+	//DataBaseHandler dbh=new DataBaseHandler();
+	facade.insertData(listOfWords,con);
 	
 	}
 
@@ -44,10 +47,10 @@ public void importFiles(File file) throws IOException, SQLException
  * @return LinkedList<String[]>
  * @throws SQLException
  */
-public static LinkedList<String[]> getDataFromDb() throws SQLException
+public LinkedList<String[]> getDataFromDb() throws SQLException
 {
-	DataBaseHandler dbh=new DataBaseHandler();
-	LinkedList<String[]> list=dbh.getDicData(con);
+	//DataBaseHandler dbh=new DataBaseHandler();
+	LinkedList<String[]> list=facade.getDicData(con);
 	return list;
 	}
 

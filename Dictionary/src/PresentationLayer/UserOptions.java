@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class UserOptions extends JFrame {
@@ -50,9 +51,16 @@ public class UserOptions extends JFrame {
 		JButton btnNewButton = new JButton("منتظم");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login l=new Login();
-				l.show();
-				dispose();
+				Login l;
+				try {
+					l = new Login();
+					l.show();
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+				}
+				
 			}
 		});
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 25));

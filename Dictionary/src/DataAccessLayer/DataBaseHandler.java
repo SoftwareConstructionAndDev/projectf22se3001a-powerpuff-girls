@@ -12,20 +12,20 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-public class DataBaseHandler {
+public class DataBaseHandler implements IDBHandler{
 	/**
 	 * @author Saliha Shahid
 	 * @return
 	 * @throws SQLException
 	 */
-	public  Connection connectDb() throws SQLException {
+	/*public  Connection connectDb() throws SQLException {
 		String url = "jdbc:mysql://localhost:3306/Dictionary?useSSL=false";
         String user = "root";
         String password = "";
         Connection con = DriverManager.getConnection(url, user, password);
         //System.out.println("Connected");
         return con;
-	}
+	}*/
 	
 	/**
 	 * @author Saliha Shahid
