@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BusinessLogicLayer.FacadeBLL;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -16,6 +19,7 @@ import java.awt.event.ActionEvent;
 public class UserOptions extends JFrame {
 
 	private JPanel contentPane;
+	 
 
 	/**
 	 * Launch the application.

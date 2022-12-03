@@ -19,11 +19,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import BusinessLogicLayer.DictionaryBLL;
+import BusinessLogicLayer.FacadeBLL;
 
 public class AdminOptions extends JFrame {
 
 	private JPanel contentPane;
-
+    private FacadeBLL facade=new FacadeBLL();
 	/**
 	 * Launch the application.
 	 */
@@ -66,8 +67,8 @@ public class AdminOptions extends JFrame {
 					
 					try {
 						File file=new File(fc.getSelectedFile().getAbsolutePath());
-						DictionaryBLL dbll=new DictionaryBLL();
-						dbll.importFiles(file);
+						//DictionaryBLL dbll=new DictionaryBLL();
+						facade.importFiles(file);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "ایکسیپشن IO");

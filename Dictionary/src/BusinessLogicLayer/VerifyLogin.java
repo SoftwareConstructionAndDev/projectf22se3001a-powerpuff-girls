@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import DataAccessLayer.DataBaseConnection;
 import DataAccessLayer.DataBaseHandler;
 import PresentationLayer.Login;
-import DataAccessLayer.Facade;
-public class VerifyLogin {
+import DataAccessLayer.FacadeDAL;
+public class VerifyLogin implements IVerifyLogin{
 	/**
 	 * @author Saliha Shahid
 	 * @param un
@@ -15,7 +15,7 @@ public class VerifyLogin {
 	 * @return
 	 * @throws SQLException
 	 */
-	private Facade facade=new Facade();
+	private FacadeDAL facade=new FacadeDAL();
 	private Connection con;
 	public VerifyLogin() throws SQLException
 	{

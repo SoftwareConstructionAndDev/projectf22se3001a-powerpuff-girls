@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import BusinessLogicLayer.DictionaryBLL;
+import BusinessLogicLayer.FacadeBLL;
+
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 public class DataView extends JFrame {
@@ -19,6 +21,7 @@ public class DataView extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane scrollPane;
+	 private FacadeBLL facade=new FacadeBLL();
 
 	/**
 	 * Launch the application.
@@ -71,8 +74,8 @@ public class DataView extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(407, 11, 17, 222);
 		contentPane.add(scrollBar);
-		DictionaryBLL dbll=new DictionaryBLL();
-		LinkedList<String[]> list=dbll.getDataFromDb();
+		//DictionaryBLL dbll=new DictionaryBLL();
+		LinkedList<String[]> list=facade.getDataFromDb();
 		for(int i=0;i<list.size();i++)
 		{
 			String[] wordData=list.get(i);

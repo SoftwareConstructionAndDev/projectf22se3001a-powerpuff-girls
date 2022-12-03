@@ -11,7 +11,7 @@ import java.util.LinkedList;
  *
  */
 
-public interface IFacade extends IDBHandler {
+public interface IFacadeDAL extends IDBHandler {
 	public  ArrayList<String> getLoginData(Connection con) throws SQLException;
 	public String generateUnVocalizedForm(String word);
 	public void insertData(LinkedList<String[]>list, Connection con) throws SQLException;

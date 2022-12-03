@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import BusinessLogicLayer.DictionaryBLL;
+import BusinessLogicLayer.FacadeBLL;
 import BusinessLogicLayer.VerifyLogin;
 
 public class Login extends JFrame {
@@ -25,6 +26,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	 private JTextField textField;
 	private JPasswordField passwordField;
+	 private FacadeBLL facade=new FacadeBLL();
 
 	/**
 	 * Launch the application.
@@ -90,27 +92,21 @@ public class Login extends JFrame {
 		JButton btnNewButton = new JButton("لاگ ان");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VerifyLogin lg;
+				//lg = new VerifyLogin();
 				try {
-					lg = new VerifyLogin();
-					try {
-						if(lg.loginValidity(textField.getText(),passwordField.getText())==true)
-						{
-							AdminOptions ao=new AdminOptions();
-							ao.show();
-							dispose();	
-						}
-						else
-						{
-							JOptionPane.showMessageDialog(null, "صارف نام یا پاس ورڈ غلط ہے۔");
-						}
-					} catch (HeadlessException | SQLException e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+					if(facade.loginValidity(textField.getText(),passwordField.getText())==true)
+					{
+						AdminOptions ao=new AdminOptions();
+						ao.show();
+						dispose();	
 					}
-				} catch (SQLException e2) {
+					else
+					{
+						JOptionPane.showMessageDialog(null, "صارف نام یا پاس ورڈ غلط ہے۔");
+					}
+				} catch (HeadlessException | SQLException e1) {
 					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
 				}
 				
 				

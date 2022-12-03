@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * @author Saliha Shahid
  *
  */
-public class Facade implements IFacade {
+public class FacadeDAL implements IFacadeDAL {
 private IDBHandler dbHandler=new DataBaseHandler();
 public  ArrayList<String> getLoginData(Connection con) throws SQLException
 {

@@ -10,13 +10,13 @@ import java.util.LinkedList;
 
 import DataAccessLayer.DataBaseConnection;
 import DataAccessLayer.DataBaseHandler;
-import DataAccessLayer.Facade;
+import DataAccessLayer.FacadeDAL;
 
 
-public class DictionaryBLL {
+public class DictionaryBLL implements IDictionaryBLL{
 	private  LinkedList<String[]>listOfWords=new LinkedList<String[]>();
 	private static Connection con;
-	private  Facade facade=new Facade();
+	private  FacadeDAL facade=new FacadeDAL();
 	public DictionaryBLL() throws SQLException{con=DataBaseConnection.getConnection();}
 	/**
 	 * @author Saliha Shahid
