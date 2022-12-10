@@ -38,7 +38,7 @@ public void importFiles(File file) throws IOException, SQLException
 		
 	}
 	//DataBaseHandler dbh=new DataBaseHandler();
-	facade.insertData(listOfWords,con);
+	facade.insertData(listOfWords);
 	
 	}
 
@@ -50,18 +50,20 @@ public void importFiles(File file) throws IOException, SQLException
 public LinkedList<String[]> getDataFromDb() throws SQLException
 {
 	//DataBaseHandler dbh=new DataBaseHandler();
-	LinkedList<String[]> list=facade.getDicData(con);
+	LinkedList<String[]> list=facade.getDicData();
 	return list;
 	}
 
-/**
- * @author Saliha Shahid
- * @return db connection
- * @throws SQLException
- */
-public void getConnection() throws SQLException
+public void createTables() throws SQLException
 {
-	DataBaseConnection.getConnection();
-			}
+	facade.createTables();
+	
+	}
+@Override
+public void getConnection() throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
+
 
 }

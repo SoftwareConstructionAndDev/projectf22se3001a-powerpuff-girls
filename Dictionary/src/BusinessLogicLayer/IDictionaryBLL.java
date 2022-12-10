@@ -9,4 +9,5 @@ public interface IDictionaryBLL {
 	public void importFiles(File file) throws IOException, SQLException;
 	public LinkedList<String[]> getDataFromDb() throws SQLException;
 	public void getConnection() throws SQLException;
+	public void createTables() throws SQLException;
 }

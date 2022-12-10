@@ -13,7 +13,10 @@ public class FacadeBLL implements IFacadeBLL {
 		dbll=new DictionaryBLL();
 		vl=new VerifyLogin();
 	}
-	
+	public void createTables() throws SQLException
+	{
+		dbll.createTables();	
+	}
 	public boolean loginValidity(String un,String pass) throws SQLException
 	{
 		return vl.loginValidity(un, pass);
@@ -26,8 +29,10 @@ public class FacadeBLL implements IFacadeBLL {
 	{
 		return dbll.getDataFromDb();
 	}
-	public void getConnection() throws SQLException
-	{
-		dbll.getConnection();
+	@Override
+	public void getConnection() throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
+	
 }

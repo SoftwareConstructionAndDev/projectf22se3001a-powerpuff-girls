@@ -26,7 +26,7 @@ public class VerifyLogin implements IVerifyLogin{
 		Login lg=new Login();
 		//DataBaseHandler dbh=new DataBaseHandler();
 		ArrayList<String> list=new ArrayList<String>();
-		list=facade.getLoginData(con);
+		list=facade.getLoginData();
 		System.out.println(un);
 		System.out.println(pass);
 		if((list.get(0)).equals(un)&&(list.get(1)).equals(pass))

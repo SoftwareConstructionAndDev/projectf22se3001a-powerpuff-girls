@@ -9,32 +9,45 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import net.oujda_nlp_team.AlKhalil2Analyzer;
+
 public class DataBaseHandler implements IDBHandler{
+	 
+	 public DataBaseHandler() throws SQLException
+	 {
+		  
+	 }
 	/**
 	 * @author Saliha Shahid
 	 * @return
 	 * @throws SQLException
 	 */
-	/*public  Connection connectDb() throws SQLException {
-		String url = "jdbc:mysql://localhost:3306/Dictionary?useSSL=false";
-        String user = "root";
-        String password = "";
-        Connection con = DriverManager.getConnection(url, user, password);
-        //System.out.println("Connected");
-        return con;
-	}*/
+	 
+	 public void createTables() throws SQLException
+	 {
+		 Connection con = DataBaseConnection.getConnection();
+		//String query="create table لغت if not exists(رقم int(11) AUTO_INCREMENT PRIMARY KEY,مشکول text, صنف text, أصل text, جنس text, عدد text, معانی text, غیرمشکول text, غیرأصل text );";
+			String createLughat="CREATE TABLE `لغت` IF NOT EXISTS( `رقم` int(11) NOT NULL AUTO_INCREMENT, `مشكول` text DEFAULT NULL, `صنف` text DEFAULT NULL, `أصل` varchar(1000) DEFAULT NULL, `جنس` text DEFAULT NULL, `عدد` text DEFAULT NULL, `معانی` text DEFAULT NULL, `غیرمشکول` text DEFAULT NULL, `غیرأصل` text DEFAULT NULL, `روٹ` text DEFAULT NULL, PRIMARY KEY (`رقم`), KEY `أصل` (`أصل`), CONSTRAINT `لغت_ibfk_1` FOREIGN KEY (`أصل`) REFERENCES `foreignkeytable` (`اصل`)) ENGINE=InnoDB AUTO_INCREMENT=15198 DEFAULT CHARSET=utf8";
+	        String createRootTable="CREATE TABLE `roottable` (`رقم` int(11) NOT NULL AUTO_INCREMENT, `مشكول` text NOT NULL, `روٹ` text NOT NULL, PRIMARY KEY (`رقم`)) ENGINE=InnoDB AUTO_INCREMENT=1265 DEFAULT CHARSET=utf8\r\n";
+	        String createRootfkTable="CREATE TABLE `rootfktable` IF NOT EXISTS(`ID` int(11) NOT NULL, `rootID` int(11) NOT NULL,  PRIMARY KEY (`ID`,`rootID`)) ENGINE=InnoDB DEFAULT CHARSET=utf8\r\n";
+	        String createLoginTable="CREATE TABLE `login` IF NOT EXISTS(`Username` text NOT NULL, `Password` varchar(9) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+	        String createfkTable="CREATE TABLE `foreignkeytable` IF NOT EXISTS(`اصل` varchar(1000) NOT NULL,  PRIMARY KEY (`اصل`), UNIQUE KEY `اصل` (`اصل`)) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+	        PreparedStatement preparedStatementLughat=con.prepareStatement(createLughat);
+	        PreparedStatement preparedStatementRootTable=con.prepareStatement(createRootTable);
+	        PreparedStatement preparedStatementRootfkTable=con.prepareStatement(createRootfkTable);
+	        PreparedStatement preparedStatementLoginTable=con.prepareStatement(createLoginTable);
+	        PreparedStatement preparedStatementfkTable=con.prepareStatement(createfkTable);
+	        
+	 }
 	
-	/**
-	 * @author Saliha Shahid
-	 * @return
-	 * @throws SQLException
-	 */
-	public  ArrayList<String> getLoginData(Connection con) throws SQLException
+	public  ArrayList<String> getLoginData() throws SQLException
 	{
 		//Connection con=connectDb();
+		Connection con = DataBaseConnection.getConnection();
 		String query="Select * from login";
 		Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -46,14 +59,25 @@ public class DataBaseHandler implements IDBHandler{
         	str=rs.getString("Password");
         	list.add(str);
         }
+        con.close();
         return list;
 	}
+	
+	
 	
 	/**
 	 * @author Saliha Shahid
 	 * @param word
-	 * @return
+	 * @return list of possible root words
 	 */
+	public List<String> getRoots(String word)
+	{
+		AlKhalil2Analyzer ak = null;
+		ak=ak.getInstance();
+		return ak.processToken(word).getAllRoots();
+	}
+	
+	
 	public String generateUnVocalizedForm(String word)
 	{
 		String temp="";
@@ -74,12 +98,11 @@ public class DataBaseHandler implements IDBHandler{
 	 * @param list
 	 * @throws SQLException
 	 */
-	public void insertData(LinkedList<String[]>list, Connection con) throws SQLException
+	public void insertData(LinkedList<String[]>list) throws SQLException
 	{
 		//Connection con=connectDb();
-		//String query="create table لغت if not exists(رقم int(11) AUTO_INCREMENT PRIMARY KEY,مشکول text, صنف text, أصل text, جنس text, عدد text, معانی text, غیرمشکول text, غیرأصل text );";
 		
-        //st.executeQuery(query);
+		Connection con = DataBaseConnection.getConnection();
         for(int i=1;i<list.size();i++)
         {
         	String[] word=list.get(i);
@@ -91,37 +114,117 @@ public class DataBaseHandler implements IDBHandler{
         	String many="-";
         	String gm=generateUnVocalizedForm(word[1]);
         	String gs=generateUnVocalizedForm(word[3]);
-        	String query="INSERT INTO `لغت`( `مشكول`, `صنف`, `أصل`, `جنس`, `عدد`, `معانی`, `غیرمشکول`, `غیرأصل`) VALUES ('"+mashkool+"','"+sinf+"','"+asl+"','"+jins+"','"+adad+"','"+many+"','"+gm+"','"+gs+"')";
-        	String query2="INSERT INTO `foreignkeytable`(`اصل`) VALUES ('"+asl+"');";
-        	String selQry="Select * from foreignkeytable;";
-        	Statement st1=con.createStatement();
-        	 ResultSet rs = st1.executeQuery(selQry);
-        	 boolean found=false;
-        	 while(rs.next())
-        	 {
-        		 if (asl.equals(rs.getString(1))) {
-        			 found=true;
-            		 break;
-        		 }
-        		
-        	 }
-        	 if(!found)
-        	 {
-        		 PreparedStatement st2 = con.prepareStatement(query);
-               	 st2.executeUpdate(query2); 
-        	 }
-        	
-        	PreparedStatement st = con.prepareStatement(query);
-        	 st.executeUpdate(query);
-        	 
-        	 
-        	
+        	insertInFKTable(asl);
+        	insertInLughatTable(mashkool, sinf, asl, jins, adad, many, gm, gs);
+        	Statement statement;
+        	PreparedStatement preparedStatement;
+        	List<String> listOfRoots=new ArrayList<String>();
+          	listOfRoots=getRoots(mashkool);
+          	for(int j=0;j<listOfRoots.size();j++)
+          	{
+          		String insertQueryForRootTable="INSERT INTO `roottable`(`مشكول`, `روٹ`) VALUES ('"+mashkool+"','"+listOfRoots.get(j)+"');";
+              	preparedStatement = con.prepareStatement(insertQueryForRootTable);
+              	String queryTogetRootID="SELECT 	`رقم` FROM `roottable` WHERE `روٹ`='"+listOfRoots.get(j)+"';";
+          		statement =con.createStatement();
+           	    ResultSet rootId = statement.executeQuery(queryTogetRootID);
+           	    
+          		String queryToGetMashkoolId="SELECT  `رقم` FROM `لغت` WHERE `مشكول`='"+mashkool+"';";
+          		statement=con.createStatement();
+          		ResultSet mashkoolId = statement.executeQuery(queryToGetMashkoolId);
+          		
+          		if(rootId.next()&&mashkoolId.next())
+          		{
+          			insertInRootFKTable(mashkoolId.getInt(1), rootId.getInt(1));	
+          		}
+          		
+          		
+          	}
+          	
+          	
+          	
         }
-		
+        JOptionPane.showMessageDialog(null, " فائل امپورٹ ہو گئی ہے ");
+        con.close();
+        
+          	
 	}
-	public LinkedList<String[]> getDicData(Connection con) throws SQLException
+	public void insertInFKTable(String asl) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String query="INSERT INTO `foreignkeytable`(`اصل`) VALUES ('"+asl+"');";
+		String selectQry="Select * from foreignkeytable;";
+    	Statement st1=con.createStatement();
+    	ResultSet rs = st1.executeQuery(selectQry);
+    	boolean found=false;
+    	while(rs.next())
+    	{
+    		if (asl.equals(rs.getString(1))) {
+    			 found=true;
+        		 break;
+    		 }
+    		
+    	 }
+    	 if(!found)
+    	 {
+    		 PreparedStatement st2 = con.prepareStatement(query);
+           	 st2.executeUpdate(query); 
+    	 }
+    	 con.close();
+	}
+	public void insertInLughatTable(String mashkool, String sinf, String asl, String jins, String adad, String many, String gm, String gs) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String insertIntoLughatQuery="INSERT INTO `لغت`( `مشكول`, `صنف`, `أصل`, `جنس`, `عدد`, `معانی`, `غیرمشکول`, `غیرأصل`) VALUES ('"+mashkool+"','"+sinf+"','"+asl+"','"+jins+"','"+adad+"','"+many+"','"+gm+"','"+gs+"')";
+		 String selectQuery="SELECT * FROM `لغت`";
+    	 boolean maskoolFound=false;
+    	 PreparedStatement st = con.prepareStatement(insertIntoLughatQuery);
+     	ResultSet rs=st.executeQuery(selectQuery);
+     	while(rs.next())
+    	    {
+    		 if (mashkool.equals(rs.getString(1))) {
+    			maskoolFound=true;
+        		 break;
+    		 }
+    		
+    	   }
+    	   if(!maskoolFound)
+    	   {
+    		 PreparedStatement st2 = con.prepareStatement(insertIntoLughatQuery);
+           	 st2.executeUpdate(insertIntoLughatQuery); 
+           	 }
+    	   con.close();
+    	   }
+
+	
+	public void insertInRootFKTable(int id, int rootId) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String insertQueryForRootfkTable="INSERT INTO `rootfktable`(`ID`, `rootID`) VALUES ("+id+","+rootId+");";
+		String selectQry="Select * from rootfktable;";
+    	Statement statement=con.createStatement();
+    	ResultSet rs = statement.executeQuery(selectQry);
+    	boolean found=false;
+    	while(rs.next())
+    	{
+    		if (id==rs.getInt(1)&&rootId==rs.getInt(2)) {
+    			 found=true;
+        		 break;
+    		 }
+    		
+    	 }
+    	 if(!found)
+    	 {
+    		PreparedStatement preparedStatement = con.prepareStatement(insertQueryForRootfkTable);
+    	  		preparedStatement.executeUpdate(insertQueryForRootfkTable);  
+    	 }
+  		con.close();
+    	   }
+
+		
+	public LinkedList<String[]> getDicData() throws SQLException
 	{
 		//Connection con=connectDb();
+		Connection con = DataBaseConnection.getConnection();
 		String query="Select * from لغت";
 		Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);	
@@ -141,6 +244,8 @@ public class DataBaseHandler implements IDBHandler{
         	list.add(wordsData);
         	
         }
+        con.close();
         return list;
+        
 	}
 }

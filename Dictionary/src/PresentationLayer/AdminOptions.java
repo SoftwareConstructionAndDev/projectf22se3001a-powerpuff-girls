@@ -60,7 +60,7 @@ public class AdminOptions extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fc=new JFileChooser();
-				FileNameExtensionFilter fileFilter=new FileNameExtensionFilter("file","csv");
+				FileNameExtensionFilter fileFilter=new FileNameExtensionFilter(".csv","csv");
 				fc.setFileFilter(fileFilter);
 				int fileChosen=fc.showOpenDialog(null);
 				if(fileChosen==JFileChooser.APPROVE_OPTION) {
