@@ -20,6 +20,9 @@ import javax.swing.border.EmptyBorder;
 import BusinessLogicLayer.DictionaryBLL;
 import BusinessLogicLayer.FacadeBLL;
 import BusinessLogicLayer.VerifyLogin;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 
 public class Login extends JFrame {
 
@@ -103,10 +106,20 @@ public class Login extends JFrame {
 					else
 					{
 						JOptionPane.showMessageDialog(null, "صارف نام یا پاس ورڈ غلط ہے۔");
+						PropertyConfigurator.configure("log4j.properties");
+						Logger logger=Logger.getLogger(Login.class);
+						logger.info("Wrong username or password");
+						logger.warn("Wrong username or password");
+						logger.error("Wrong username or password");
 					}
 				} catch (HeadlessException | SQLException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+					PropertyConfigurator.configure("log4j.properties");
+					Logger logger=Logger.getLogger(Login.class);
+					logger.info("SQL EXCEPTION");
+					logger.warn("SQL EXCEPTION");
+					logger.error("SQL EXCEPTION");
 				}
 				
 				

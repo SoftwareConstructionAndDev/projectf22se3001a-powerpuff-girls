@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import BusinessLogicLayer.DictionaryBLL;
 import BusinessLogicLayer.FacadeBLL;
 
@@ -72,10 +75,20 @@ public class AdminOptions extends JFrame {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "ایکسیپشن IO");
+						PropertyConfigurator.configure("log4j.properties");
+						Logger logger=Logger.getLogger(Login.class);
+						logger.info("IO EXCEPTION");
+						logger.warn("IO EXCEPTION");
+						logger.error("IO EXCEPTION");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						//JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+						PropertyConfigurator.configure("log4j.properties");
+						Logger logger=Logger.getLogger(Login.class);
+						logger.info("SQL EXCEPTION");
+						logger.warn("SQL EXCEPTION");
+						logger.error("SQL EXCEPTION");
 					}					
 				}
 			}

@@ -7,6 +7,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import BusinessLogicLayer.FacadeBLL;
 
 import java.awt.Color;
@@ -32,6 +35,12 @@ public class UserOptions extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "ایکسیپشن");
+					
+					PropertyConfigurator.configure("log4j.properties");
+					Logger logger=Logger.getLogger(Login.class);
+					logger.info("EXCEPTION");
+					logger.warn("EXCEPTION");
+					logger.error("EXCEPTION");
 				}
 			}
 		});
