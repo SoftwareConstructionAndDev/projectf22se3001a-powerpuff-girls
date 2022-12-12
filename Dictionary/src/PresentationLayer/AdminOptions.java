@@ -31,7 +31,7 @@ public class AdminOptions extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -42,7 +42,7 @@ public class AdminOptions extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -95,7 +95,7 @@ public class AdminOptions extends JFrame {
 		});
 		btnNewButton.setBackground(new Color(0, 153, 153));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton.setBounds(28, 29, 113, 54);
+		btnNewButton.setBounds(148, 22, 120, 54);
 		contentPane.add(btnNewButton);
 		
 		JButton btnViewData = new JButton("ویو ڈیٹا");
@@ -115,8 +115,21 @@ public class AdminOptions extends JFrame {
 		});
 		btnViewData.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnViewData.setBackground(new Color(0, 153, 153));
-		btnViewData.setBounds(169, 31, 120, 51);
+		btnViewData.setBounds(148, 95, 120, 51);
 		contentPane.add(btnViewData);
+		
+		JButton btnViewData_1 = new JButton("اپ ڈیٹ ورڈ");
+		btnViewData_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UpdateWord uw=new UpdateWord();
+				uw.show();
+				dispose();
+			}
+		});
+		btnViewData_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnViewData_1.setBackground(new Color(0, 153, 153));
+		btnViewData_1.setBounds(148, 171, 120, 51);
+		contentPane.add(btnViewData_1);
 	}
 	
 	/**

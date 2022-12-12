@@ -248,4 +248,122 @@ public class DataBaseHandler implements IDBHandler{
         return list;
         
 	}
+	
+	public ArrayList<String> getMeaningInUrdu(String mashkool) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String selectQry="SELECT * FROM `لغت` WHERE مشكول LIKE '"+mashkool+"' OR غیرمشکول LIKE '"+mashkool+"';";
+    	Statement statement=con.createStatement();
+    	ResultSet rs = statement.executeQuery(selectQry);
+    	ArrayList<String> wordData=new ArrayList<String>();
+    	if(rs.next())
+    	{
+    		wordData.add(rs.getString(2));//mashkool
+        	wordData.add(rs.getString(3));//sinf
+        	wordData.add(rs.getString(4));//asal
+        	wordData.add(rs.getString(5));//jins
+        	wordData.add(rs.getString(6));//adad
+        	wordData.add(rs.getString(7));//mani
+        	wordData.add(rs.getString(8));//ghair mashkool
+        	wordData.add(rs.getString(9));//ghair asal
+        	wordData.add(rs.getString(10));//root
+        	con.close();
+        	return wordData;
+    	}
+    	return null;
+		
+	}
+	public ArrayList<String> getMeaningInArabic(String word) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String selectQry="SELECT * FROM `لغت` WHERE معانی LIKE '"+word+"';";
+    	Statement statement=con.createStatement();
+    	ResultSet rs = statement.executeQuery(selectQry);
+    	ArrayList<String> wordData=new ArrayList<String>();
+    	if(rs.next())
+    	{
+    		wordData.add(rs.getString(2));//mashkool
+        	wordData.add(rs.getString(3));//sinf
+        	wordData.add(rs.getString(4));//asal
+        	wordData.add(rs.getString(5));//jins
+        	wordData.add(rs.getString(6));//adad
+        	wordData.add(rs.getString(7));//mani
+        	wordData.add(rs.getString(8));//ghair mashkool
+        	wordData.add(rs.getString(9));//ghair asal
+        	wordData.add(rs.getString(10));//root
+        	con.close();
+        	return wordData;
+    	}
+    	con.close();
+    	return null;
+		
+	}
+	
+	public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String queryToFetchDataFromRootTable="SELECT `مشكول` FROM `roottable` WHERE `روٹ` LIKE +'"+root+"';";
+		//String selectQry="SELECT * FROM `لغت` WHERE `مشكول` IN ("+queryToFetchDataFromRootTable+";);";
+		Statement statement=con.createStatement();
+    	ResultSet rs = statement.executeQuery(queryToFetchDataFromRootTable);
+    	ArrayList<String []> listOfWords=new ArrayList<String []>();
+    	while(rs.next())
+    	{
+    		String[] wordList= {"","","","","","","",""};
+    		wordList[0]=rs.getString(1);
+    		/*wordList[1]=rs.getString(3);
+    		wordList[2]=rs.getString(4);
+    		wordList[3]=rs.getString(5);
+    		wordList[4]=rs.getString(6);
+    		wordList[5]=rs.getString(7);
+    		wordList[6]=rs.getString(8);
+    		wordList[7]=rs.getString(9);*/
+    		listOfWords.add(wordList);
+    		
+    	}
+    	con.close();
+    	return listOfWords;
+    	
+	}
+	
+	public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String query="UPDATE `لغت` SET `مشكول`='"+mashkool+"',`صنف`='"+sinf+"',`أصل`='"+asal+"',`جنس`='"+jins+"',`عدد`='"+adad+"',`معانی`='"+mani+"' WHERE  `مشكول` LIKE '"+mashkool+"';";
+		 PreparedStatement preparedStatement = con.prepareStatement(query);
+       	 preparedStatement.executeUpdate(query);
+       	JOptionPane.showMessageDialog(null, "اپڈیٹ ہو گیا ہے۔");
+		con.close();
+	}
+	
+	public ArrayList<String> getRootsuggestions(String word) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String query="SELECT `روٹ` FROM `roottable` WHERE `مشكول` LIKE '"+word+"';";
+		Statement statement=con.createStatement();
+    	ResultSet rs = statement.executeQuery(query);
+    	ArrayList<String> roots=new ArrayList<String>();
+    	
+    		while(rs.next())
+        	{
+        		roots.add(rs.getString(1));
+        	}
+    		con.close();
+    		return roots;
+    	
+		
+	}
+	
+	public void setRootInLughat(String mashkool, String selectedRoot) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		String query="UPDATE `لغت` SET `روٹ` = '"+selectedRoot+"' WHERE `مشكول` LIKE '"+mashkool+"';";
+		 PreparedStatement preparedStatement = con.prepareStatement(query);
+       	 preparedStatement.executeUpdate(query);
+       	JOptionPane.showMessageDialog(null, "روٹ اپڈیٹ ہو گیا ہے۔");
+		con.close();
+	}
+	
+	
+	
 }

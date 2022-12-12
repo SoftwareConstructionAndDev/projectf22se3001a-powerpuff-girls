@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import DataAccessLayer.DataBaseConnection;
@@ -64,6 +65,28 @@ public void getConnection() throws SQLException {
 	// TODO Auto-generated method stub
 	
 }
-
-
+public ArrayList<String> getMeaningInUrdu(String mashkool) throws SQLException
+{
+	return facade.getMeaningInUrdu(mashkool);
+	}
+public ArrayList<String> getMeaningInArabic(String word) throws SQLException
+{
+	return facade.getMeaningInArabic(word);
+	}
+public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws SQLException
+{
+	return facade.returnListOfMashkoolAgainstRoot(root);
+	}
+public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+{
+	facade.updateInLughat(mashkool, sinf, asal, jins, adad, mani);
+	}
+public ArrayList<String> getRootsuggestions(String word) throws SQLException
+{
+	return facade.getRootsuggestions(word);
+	}
+public void setRootInLughat(String mashkool, String selectedRoot) throws SQLException
+{
+	facade.setRootInLughat(mashkool, selectedRoot);
+	}
 }

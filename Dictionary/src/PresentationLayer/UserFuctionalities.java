@@ -3,15 +3,8 @@ package PresentationLayer;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
-import BusinessLogicLayer.FacadeBLL;
-
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -19,10 +12,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class UserOptions extends JFrame {
+public class UserFuctionalities extends JFrame {
 
 	private JPanel contentPane;
-	 
 
 	/**
 	 * Launch the application.
@@ -31,16 +23,10 @@ public class UserOptions extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserOptions frame = new UserOptions();
+					UserFuctionalities frame = new UserFuctionalities();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "ایکسیپشن");
-					
-					PropertyConfigurator.configure("log4j.properties");
-					Logger logger=Logger.getLogger(Login.class);
-					logger.info("EXCEPTION");
-					logger.warn("EXCEPTION");
-					logger.error("EXCEPTION");
+					e.printStackTrace();
 				}
 			}
 		});
@@ -49,51 +35,63 @@ public class UserOptions extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserOptions() {
-		setTitle("User Options");
+	public UserFuctionalities() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
-		contentPane.setForeground(new Color(51, 51, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("منتظم");
+		JButton btnNewButton = new JButton("معنی دیکھیں");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login l;
+				SearchWord search;
 				try {
-					l = new Login();
-					l.show();
+					search = new SearchWord();
+					search.show();
 					dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
+					e1.printStackTrace();
 				}
+				
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 25));
-		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(0, 153, 153));
-		btnNewButton.setBounds(112, 29, 198, 79);
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewButton.setBounds(112, 30, 219, 60);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("صارف");
+		JButton btnNewButton_1 = new JButton("اپنی مرضی کے مطابق ڈکشنری بنائیں");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserFuctionalities uf=new UserFuctionalities();
-				uf.show();
+				CustomDictionary cd=new CustomDictionary();
+				cd.show();
 				dispose();
 			}
 		});
-		btnNewButton_1.setForeground(Color.BLACK);
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 25));
 		btnNewButton_1.setBackground(new Color(0, 153, 153));
-		btnNewButton_1.setBounds(112, 151, 198, 79);
+		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewButton_1.setBounds(112, 176, 219, 60);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("روٹ منتخب کریں");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SelectRoot sr=new SelectRoot();
+				sr.show();
+				dispose();
+			}
+			
+		});
+		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewButton_2.setBackground(new Color(0, 153, 153));
+		btnNewButton_2.setBounds(112, 105, 219, 60);
+		contentPane.add(btnNewButton_2);
 	}
+
 }

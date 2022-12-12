@@ -18,4 +18,10 @@ public interface IDBHandler {
 	public void insertData(LinkedList<String[]>list) throws SQLException;
 	public LinkedList<String[]> getDicData() throws SQLException;
 	public void createTables() throws SQLException;
+	public ArrayList<String> getMeaningInUrdu(String mashkool) throws SQLException;
+	public ArrayList<String> getMeaningInArabic(String word) throws SQLException;
+	public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws SQLException;
+	public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException;
+	public ArrayList<String> getRootsuggestions(String word) throws SQLException;
+	public void setRootInLughat(String mashkool, String selectedRoot) throws SQLException;
 }
