@@ -23,6 +23,9 @@ import org.apache.log4j.PropertyConfigurator;
 
 import BusinessLogicLayer.DictionaryBLL;
 import BusinessLogicLayer.FacadeBLL;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class AdminOptions extends JFrame {
 
@@ -51,13 +54,12 @@ public class AdminOptions extends JFrame {
 	
 	public AdminOptions() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 438);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("امپورٹ");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -93,10 +95,8 @@ public class AdminOptions extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBackground(new Color(0, 153, 153));
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton.setBounds(148, 22, 120, 54);
-		contentPane.add(btnNewButton);
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
 		
 		JButton btnViewData = new JButton("ویو ڈیٹا");
 		btnViewData.addActionListener(new ActionListener() {
@@ -113,23 +113,62 @@ public class AdminOptions extends JFrame {
 				
 			}
 		});
-		btnViewData.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnViewData.setBackground(new Color(0, 153, 153));
-		btnViewData.setBounds(148, 95, 120, 51);
-		contentPane.add(btnViewData);
+		btnViewData.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
+		btnViewData.setBackground(Color.WHITE);
 		
-		JButton btnViewData_1 = new JButton("اپ ڈیٹ ورڈ");
+		JButton btnViewData_1 = new JButton("ایڈ ورڈ");
 		btnViewData_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UpdateWord uw=new UpdateWord();
+				AddWord uw=new AddWord();
 				uw.show();
 				dispose();
 			}
 		});
-		btnViewData_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnViewData_1.setBackground(new Color(0, 153, 153));
-		btnViewData_1.setBounds(148, 171, 120, 51);
-		contentPane.add(btnViewData_1);
+		btnViewData_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
+		btnViewData_1.setBackground(Color.WHITE);
+		
+		JButton btnViewData_1_1 = new JButton("لاگ آوٹ");
+		btnViewData_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserOptions userOptions=new UserOptions();
+				dispose();
+				userOptions.show();
+			}
+		});
+		btnViewData_1_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
+		btnViewData_1_1.setBackground(Color.WHITE);
+		
+		JButton btnViewData_1_2 = new JButton("اپ ڈیٹ ورڈ");
+		btnViewData_1_2.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
+		btnViewData_1_2.setBackground(Color.WHITE);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(143)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnViewData_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnViewData, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+						.addComponent(btnViewData_1_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnViewData_1_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(17)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnViewData, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnViewData_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addComponent(btnViewData_1_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnViewData_1_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addGap(19))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 	
 	/**

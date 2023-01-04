@@ -364,6 +364,26 @@ public class DataBaseHandler implements IDBHandler{
 		con.close();
 	}
 	
-	
+	public ArrayList<ArrayList <String>> getCustomDic(String text) throws SQLException
+	{
+		Connection con = DataBaseConnection.getConnection();
+		ArrayList<ArrayList <String>> customDicData=new ArrayList<ArrayList <String>>();
+		String word="";
+		for(int i=0;i<text.length();i++)
+		{
+			if(text.charAt(i)==' ')
+			{
+				ArrayList<String> wordData=getMeaningInUrdu(word);
+				customDicData.add(wordData);
+				word="";
+			}
+			else
+			{
+				word=word+text.charAt(i);
+			}
+		}
+		con.close();
+		return customDicData;
+	}
 	
 }

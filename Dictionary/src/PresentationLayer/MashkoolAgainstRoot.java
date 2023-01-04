@@ -26,6 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JTextPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class MashkoolAgainstRoot extends JFrame {
 
@@ -61,7 +63,6 @@ public class MashkoolAgainstRoot extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
@@ -97,24 +98,16 @@ public class MashkoolAgainstRoot extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"روٹ", "عربی سے اردو", "اردو سے عربی"}));
 		comboBox.setFont(new Font("Tahoma", Font.BOLD, 13));
 		comboBox.setBackground(new Color(0, 153, 153));
-		comboBox.setBounds(144, 11, 129, 22);
-		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("لفظ درج کریں");
 		lblNewLabel.setForeground(new Color(0, 153, 153));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(319, 61, 75, 14);
-		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(88, 58, 209, 20);
-		contentPane.add(textField);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setEditable(false);
-		textPane.setBounds(77, 148, 220, 60);
-		contentPane.add(textPane);
 		
 		JButton btnNewButton = new JButton("ٹھیک ہے");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -172,15 +165,59 @@ public class MashkoolAgainstRoot extends JFrame {
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBackground(new Color(0, 153, 153));
-		btnNewButton.setBounds(160, 92, 89, 23);
-		contentPane.add(btnNewButton);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("مشكول");
 		lblNewLabel_1.setForeground(new Color(0, 153, 153));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(319, 166, 75, 14);
-		contentPane.add(lblNewLabel_1);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(139)
+					.addComponent(comboBox, 0, 129, Short.MAX_VALUE)
+					.addGap(156))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(83)
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+					.addGap(22)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+					.addGap(35))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(155)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+					.addGap(180))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(72)
+					.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+					.addGap(22)
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+					.addGap(35))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(6)
+					.addComponent(comboBox, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+					.addGap(25)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(3)))
+					.addGap(14)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(33)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(28)))
+					.addGap(48))
+		);
+		contentPane.setLayout(gl_contentPane);
 		
 		
 		

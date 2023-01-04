@@ -11,6 +11,9 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class UserFuctionalities extends JFrame {
 
@@ -37,13 +40,12 @@ public class UserFuctionalities extends JFrame {
 	 */
 	public UserFuctionalities() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 373);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("معنی دیکھیں");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -61,10 +63,8 @@ public class UserFuctionalities extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBackground(new Color(0, 153, 153));
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton.setBounds(112, 30, 219, 60);
-		contentPane.add(btnNewButton);
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
 		
 		JButton btnNewButton_1 = new JButton("اپنی مرضی کے مطابق ڈکشنری بنائیں");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -74,10 +74,8 @@ public class UserFuctionalities extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBackground(new Color(0, 153, 153));
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton_1.setBounds(112, 176, 219, 60);
-		contentPane.add(btnNewButton_1);
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
 		
 		JButton btnNewButton_2 = new JButton("روٹ منتخب کریں");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -88,10 +86,45 @@ public class UserFuctionalities extends JFrame {
 			}
 			
 		});
-		btnNewButton_2.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnNewButton_2.setBackground(new Color(0, 153, 153));
-		btnNewButton_2.setBounds(112, 105, 219, 60);
-		contentPane.add(btnNewButton_2);
+		btnNewButton_2.setFont(new Font("Urdu Typesetting", Font.BOLD, 15));
+		btnNewButton_2.setBackground(Color.WHITE);
+		
+		JButton btnNewButton_1_1 = new JButton("واپس جاو");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserOptions userOptions=new UserOptions();
+				dispose();
+				userOptions.show();
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
+		btnNewButton_1_1.setBackground(Color.WHITE);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(107)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton_1_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+						.addComponent(btnNewButton_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+						.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+					.addGap(98))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(25)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+					.addGap(15)
+					.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+					.addGap(11)
+					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(btnNewButton_1_1, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+					.addGap(28))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 
 }

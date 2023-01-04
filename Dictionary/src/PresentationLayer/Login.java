@@ -22,14 +22,16 @@ import BusinessLogicLayer.FacadeBLL;
 import BusinessLogicLayer.VerifyLogin;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 public class Login extends JFrame {
-
-	private JPanel contentPane;
 	 private JTextField textField;
 	private JPasswordField passwordField;
 	 private FacadeBLL facade=new FacadeBLL();
+	 private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -63,34 +65,23 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("لاگ ان");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
-		lblNewLabel.setForeground(new Color(0, 153, 153));
-		lblNewLabel.setBounds(172, 11, 105, 56);
-		contentPane.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Urdu Typesetting", Font.BOLD, 25));
+		lblNewLabel.setForeground(Color.WHITE);
 		
 		JLabel lblNewLabel_1 = new JLabel("صارف نام");
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblNewLabel_1.setForeground(new Color(0, 153, 153));
-		lblNewLabel_1.setBounds(10, 82, 76, 32);
-		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 15));
+		lblNewLabel_1.setForeground(Color.WHITE);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("پاس ورڈ");
-		lblNewLabel_1_1.setForeground(new Color(0, 153, 153));
-		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblNewLabel_1_1.setBounds(10, 141, 76, 32);
-		contentPane.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 15));
 		
 		textField = new JTextField();
-		textField.setBounds(96, 78, 273, 31);
-		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(96, 136, 273, 32);
-		contentPane.add(passwordField);
 		
 		JButton btnNewButton = new JButton("لاگ ان");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -125,10 +116,58 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBackground(new Color(0, 153, 153));
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		btnNewButton.setBounds(164, 207, 89, 23);
-		contentPane.add(btnNewButton);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(167)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+					.addGap(152))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+					.addGap(60))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblNewLabel_1_1, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+					.addGap(60))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(159)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+					.addGap(176))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(6)
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+					.addGap(15)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+							.addGap(1))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(2)
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
+					.addGap(21)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblNewLabel_1_1, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+							.addGap(5)))
+					.addGap(34)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+					.addGap(26))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 	
 }

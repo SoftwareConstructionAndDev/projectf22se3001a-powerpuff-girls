@@ -20,12 +20,20 @@ import BusinessLogicLayer.FacadeBLL;
 
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 public class DataView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane scrollPane;
 	 private FacadeBLL facade=new FacadeBLL();
+	 private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -54,17 +62,14 @@ public class DataView extends JFrame {
 	 */
 	public DataView() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 345);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 414, 222);
-		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -80,9 +85,43 @@ public class DataView extends JFrame {
 		
 		DefaultTableModel tableModel=(DefaultTableModel) table.getModel();
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(407, 11, 17, 222);
-		contentPane.add(scrollBar);
+		btnNewButton_1 = new JButton("واپس جاو");
+		btnNewButton_1.setFont(new Font("Urdu Typesetting", Font.PLAIN, 16));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminOptions adminOptions;
+				try {
+					adminOptions = new AdminOptions();
+					dispose();
+					adminOptions.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+					.addGap(5))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(164)
+					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+					.addGap(179))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		contentPane.setLayout(gl_contentPane);
 		//DictionaryBLL dbll=new DictionaryBLL();
 		LinkedList<String[]> list=facade.getDataFromDb();
 		for(int i=0;i<list.size();i++)

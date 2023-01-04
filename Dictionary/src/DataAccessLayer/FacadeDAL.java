@@ -60,4 +60,11 @@ public void setRootInLughat(String mashkool, String selectedRoot) throws SQLExce
 {
 	 dbHandler.setRootInLughat(mashkool, selectedRoot);
 	}
+public ArrayList<ArrayList <String>> getCustomDic(String text) throws SQLException
+{
+	return dbHandler.getCustomDic(text);
+	}
+public void insertInLughatTable(String mashkool, String sinf, String asl, String jins, String adad, String many, String gm, String gs) throws SQLException
+{
+	dbHandler.insertInLughatTable(mashkool, sinf, asl, jins, adad, many, gm, gs);}
 }

@@ -60,4 +60,16 @@ public class FacadeBLL implements IFacadeBLL {
 	{
 		dbll.setRootInLughat(mashkool, selectedRoot);
 	}
+	public ArrayList<ArrayList <String>> getCustomDic(String text) throws SQLException
+	{
+		return dbll.getCustomDic(text);
+	}
+	public void insertInLughatTable(String mashkool, String sinf, String asl, String jins, String adad, String many, String gm, String gs) throws SQLException
+	{
+		dbll.insertInLughatTable(mashkool, sinf, asl, jins, adad, many, gm, gs);
+	}
+	public String generateUnVocalizedForm(String word)
+	{
+		return dbll.generateUnVocalizedForm(word);
+	}
 }

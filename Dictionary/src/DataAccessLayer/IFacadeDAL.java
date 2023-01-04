@@ -23,4 +23,5 @@ public interface IFacadeDAL extends IDBHandler {
 	public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException;
 	public ArrayList<String> getRootsuggestions(String word) throws SQLException;
 	public void setRootInLughat(String mashkool, String selectedRoot) throws SQLException;
+	public ArrayList<ArrayList <String>> getCustomDic(String text) throws SQLException;
 }
