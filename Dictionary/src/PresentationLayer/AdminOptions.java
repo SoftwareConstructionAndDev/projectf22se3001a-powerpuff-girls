@@ -139,6 +139,20 @@ public class AdminOptions extends JFrame {
 		btnViewData_1_1.setBackground(Color.WHITE);
 		
 		JButton btnViewData_1_2 = new JButton("اپ ڈیٹ ورڈ");
+		btnViewData_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UpdateWord updateWord;
+				try {
+					updateWord = new UpdateWord();
+					dispose();
+					updateWord.show();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnViewData_1_2.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
 		btnViewData_1_2.setBackground(Color.WHITE);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

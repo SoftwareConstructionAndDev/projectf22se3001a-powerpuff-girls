@@ -2,7 +2,6 @@ package DataAccessLayer;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 import net.oujda_nlp_team.AlKhalil2Analyzer;
 
@@ -231,7 +232,7 @@ public class DataBaseHandler implements IDBHandler{
         LinkedList<String[]> list=new LinkedList<String[]>();
         while(rs.next())
         {
-        	String[] wordsData={"","","","","","","","",""};
+        	String[] wordsData={"","","","","","","","","",""};
         	wordsData[0]=String.valueOf(rs.getInt(1));
         	wordsData[1]=rs.getString(2);
         	wordsData[2]=rs.getString(3);
@@ -241,11 +242,24 @@ public class DataBaseHandler implements IDBHandler{
         	wordsData[6]=rs.getString(7);
         	wordsData[7]=rs.getString(8);
         	wordsData[8]=rs.getString(9);
+        	wordsData[9]=rs.getString(10);
         	list.add(wordsData);
         	
         }
         con.close();
         return list;
+        
+	}
+	
+	public java.sql.ResultSetMetaData getMetaDataOfDictionaryData() throws SQLException
+	{
+		//Connection con=connectDb();
+		Connection con = DataBaseConnection.getConnection();
+		String query="Select * from لغت";
+		Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(query);	
+        java.sql.ResultSetMetaData metaData=rs.getMetaData();
+        return metaData;
         
 	}
 	
@@ -326,13 +340,13 @@ public class DataBaseHandler implements IDBHandler{
     	
 	}
 	
-	public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+	public void updateInLughat(String mashkool, String sinf, String asal, String jins, String adad, String mani, String gm, String gs, String root) throws SQLException
 	{
 		Connection con = DataBaseConnection.getConnection();
-		String query="UPDATE `لغت` SET `مشكول`='"+mashkool+"',`صنف`='"+sinf+"',`أصل`='"+asal+"',`جنس`='"+jins+"',`عدد`='"+adad+"',`معانی`='"+mani+"' WHERE  `مشكول` LIKE '"+mashkool+"';";
-		 PreparedStatement preparedStatement = con.prepareStatement(query);
+		//String query="UPDATE `لغت` SET `مشكول`='"+mashkool+"',`صنف`='"+sinf+"',`أصل`='"+asal+"',`جنس`='"+jins+"',`عدد`='"+adad+"',`معانی`='"+mani+"' WHERE  `مشكول` LIKE '"+mashkool+"';";
+		String query="UPDATE `لغت` SET `مشكول`='"+mashkool+"',`صنف`='"+sinf+"',`أصل`='"+asal+"',`جنس`='"+jins+"',`عدد`='"+adad+"',`معانی`='"+mani+"',`غیرمشکول`='"+gm+"',`غیرأصل`='"+gs+"',`روٹ`='"+root+"' WHERE `مشكول` LIKE '"+mashkool+"';";
+		PreparedStatement preparedStatement = con.prepareStatement(query);
        	 preparedStatement.executeUpdate(query);
-       	JOptionPane.showMessageDialog(null, "اپڈیٹ ہو گیا ہے۔");
 		con.close();
 	}
 	

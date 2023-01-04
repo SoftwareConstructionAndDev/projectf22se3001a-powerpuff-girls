@@ -48,9 +48,9 @@ public class FacadeBLL implements IFacadeBLL {
 	{
 		return dbll.returnListOfMashkoolAgainstRoot(root);
 	}
-	public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+	public void updateInLughat(String mashkool, String sinf, String asal, String jins, String adad, String mani, String gm, String gs, String root) throws SQLException
 	{
-		dbll.updateInLughat(mashkool, sinf, asal, jins, adad, mani);
+		dbll.updateInLughat(mashkool, sinf, asal, jins, adad, mani,gm,gs,root);
 	}
 	public ArrayList<String> getRootsuggestions(String word) throws SQLException
 	{
@@ -71,5 +71,9 @@ public class FacadeBLL implements IFacadeBLL {
 	public String generateUnVocalizedForm(String word)
 	{
 		return dbll.generateUnVocalizedForm(word);
+	}
+	public java.sql.ResultSetMetaData getMetaDataOfDictionaryData() throws SQLException
+	{
+		return dbll.getMetaDataOfDictionaryData();
 	}
 }

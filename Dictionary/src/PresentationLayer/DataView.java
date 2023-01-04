@@ -72,16 +72,16 @@ public class DataView extends JFrame {
 		scrollPane = new JScrollPane();
 		
 		table = new JTable();
+		table.setFillsViewportHeight(true);
+		table.setFont(new Font("Urdu Typesetting", Font.PLAIN, 12));
+		table.setEnabled(false);
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"\u0631\u0642\u0645", "\u0645\u0634\u06A9\u0648\u0644", "\u0635\u0646\u0641", "\u0623\u0635\u0644", "\u062C\u0646\u0633", "\u0639\u062F\u062F", "\u0645\u0639\u0627\u0646\u06CC", "\u063A\u06CC\u0631\u0645\u0634\u06A9\u0648\u0644", "\t\u063A\u06CC\u0631\u0623\u0635\u0644"
 			}
 		));
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
 		
 		DefaultTableModel tableModel=(DefaultTableModel) table.getModel();
 		
@@ -123,6 +123,13 @@ public class DataView extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 		//DictionaryBLL dbll=new DictionaryBLL();
+		int numberOfColumns=facade.getMetaDataOfDictionaryData().getColumnCount();
+		String[] columNames=new String[numberOfColumns];
+		for(int i=0;i<numberOfColumns;i++)
+		{
+			columNames[i]=facade.getMetaDataOfDictionaryData().getColumnName(i+1);
+		}
+		tableModel.setColumnIdentifiers(columNames);
 		LinkedList<String[]> list=facade.getDataFromDb();
 		for(int i=0;i<list.size();i++)
 		{

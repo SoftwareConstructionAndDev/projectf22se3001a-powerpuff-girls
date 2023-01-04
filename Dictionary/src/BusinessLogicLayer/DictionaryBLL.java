@@ -77,9 +77,9 @@ public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws 
 {
 	return facade.returnListOfMashkoolAgainstRoot(root);
 	}
-public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+public void updateInLughat(String mashkool, String sinf, String asal, String jins, String adad, String mani, String gm, String gs, String root) throws SQLException
 {
-	facade.updateInLughat(mashkool, sinf, asal, jins, adad, mani);
+	facade.updateInLughat(mashkool, sinf, asal, jins, adad, mani,gm,gs,root);
 	}
 public ArrayList<String> getRootsuggestions(String word) throws SQLException
 {
@@ -100,4 +100,8 @@ public String generateUnVocalizedForm(String word)
 {
 	return facade.generateUnVocalizedForm(word);
 	}
+public java.sql.ResultSetMetaData getMetaDataOfDictionaryData() throws SQLException
+{
+	return facade.getMetaDataOfDictionaryData();
+}
 }

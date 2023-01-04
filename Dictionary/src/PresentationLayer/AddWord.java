@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -69,8 +70,10 @@ public class AddWord extends JFrame {
 					//facade.updateInLughat(mashkool.getText(),sinf.getText(),asal.getText(),jins.getText(),adad.getText(),mani.getText());
 					
 					facade.insertInLughatTable(mashkool.getText(),mashkool.getText(),asal.getText(),jins.getText(),adad.getText(),mani.getText(),facade.generateUnVocalizedForm(mashkool.getText()),facade.generateUnVocalizedForm(asal.getText()));
+					JOptionPane.showMessageDialog(null, "لغت میں لفظ شامل کر دیا گیا ہے۔");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "ایکسیپشن SQL");
 					e1.printStackTrace();
 				}
 				

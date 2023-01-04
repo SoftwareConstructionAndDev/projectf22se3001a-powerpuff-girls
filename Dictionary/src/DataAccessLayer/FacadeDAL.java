@@ -48,9 +48,9 @@ public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws 
 {
 	return dbHandler.returnListOfMashkoolAgainstRoot(root);
 	}
-public void updateInLughat(String mashkool,String sinf, String asal,String jins, String adad,String mani) throws SQLException
+public void updateInLughat(String mashkool, String sinf, String asal, String jins, String adad, String mani, String gm, String gs, String root) throws SQLException
 {
-	dbHandler.updateInLughat(mashkool, sinf, asal, jins, adad, mani);
+	dbHandler.updateInLughat(mashkool, sinf, asal, jins, adad, mani,gm,gs,root);
 	}
 public ArrayList<String> getRootsuggestions(String word) throws SQLException
 {
@@ -67,4 +67,9 @@ public ArrayList<ArrayList <String>> getCustomDic(String text) throws SQLExcepti
 public void insertInLughatTable(String mashkool, String sinf, String asl, String jins, String adad, String many, String gm, String gs) throws SQLException
 {
 	dbHandler.insertInLughatTable(mashkool, sinf, asl, jins, adad, many, gm, gs);}
+
+public java.sql.ResultSetMetaData getMetaDataOfDictionaryData() throws SQLException
+{
+	return dbHandler.getMetaDataOfDictionaryData();
+}
 }
