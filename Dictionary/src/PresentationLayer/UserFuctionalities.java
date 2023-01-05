@@ -69,9 +69,16 @@ public class UserFuctionalities extends JFrame {
 		JButton btnNewButton_1 = new JButton("اپنی مرضی کے مطابق ڈکشنری بنائیں");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CustomDictionary cd=new CustomDictionary();
-				cd.show();
-				dispose();
+				CustomDictionary cd;
+				try {
+					cd = new CustomDictionary();
+					cd.show();
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				;
 			}
 		});
 		btnNewButton_1.setBackground(Color.WHITE);

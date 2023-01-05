@@ -24,6 +24,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class UpdateWord extends JFrame {
 
@@ -60,11 +62,8 @@ private JTextField textField;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 414, 225);
-		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		table.setColumnSelectionAllowed(true);
@@ -120,8 +119,6 @@ private JTextField textField;
 			}
 		});
 		btnNewButton_1.setFont(new Font("Urdu Typesetting", Font.PLAIN, 16));
-		btnNewButton_1.setBounds(61, 294, 117, 42);
-		contentPane.add(btnNewButton_1);
 		
 		FacadeBLL facade=new FacadeBLL();
 		
@@ -181,13 +178,40 @@ DefaultTableModel tableModel=(DefaultTableModel) table.getModel();
 			}
 		});
 		btnNewButton_1_1.setFont(new Font("Urdu Typesetting", Font.PLAIN, 16));
-		btnNewButton_1_1.setBounds(274, 294, 107, 42);
-		contentPane.add(btnNewButton_1_1);
 		
 		textField = new JTextField();
-		textField.setBounds(49, 252, 316, 31);
-		contentPane.add(textField);
 		textField.setColumns(10);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(44)
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+					.addGap(64))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(56)
+					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+					.addGap(96)
+					.addComponent(btnNewButton_1_1, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+					.addGap(48))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(6)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+					.addGap(16)
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+					.addGap(11)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+						.addComponent(btnNewButton_1_1, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+					.addGap(23))
+		);
+		contentPane.setLayout(gl_contentPane);
 		
 	}
 }

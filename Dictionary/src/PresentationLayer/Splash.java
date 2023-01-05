@@ -41,11 +41,6 @@ public class Splash extends JFrame {
 						e.printStackTrace();
 					}
 					
-					
-					
-					
-					
-				
 			}
 		});
 	}

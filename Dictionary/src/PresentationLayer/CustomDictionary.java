@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import BusinessLogicLayer.FacadeBLL;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextArea;
@@ -12,18 +16,23 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTable;
 
 public class CustomDictionary extends JFrame {
 
 	private JPanel contentPane;
+	public String text;
+	public JTextArea textArea;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -34,14 +43,15 @@ public class CustomDictionary extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public CustomDictionary() {
+	public CustomDictionary() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 502);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,19 +59,25 @@ public class CustomDictionary extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("متن درج کریں");
-		lblNewLabel.setForeground(new Color(0, 153, 153));
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Urdu Typesetting", Font.BOLD, 18));
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
+		text=textArea.getText().toString();
 		
 		JButton btnNewButton = new JButton("ٹھیک ہے");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserDictionary ud;
+				
+				//dispose();
+				UserDictionary userDictionary;
 				try {
-					ud = new UserDictionary(textArea.getText());
-					ud.show();
+					userDictionary = new UserDictionary();
+					
+					System.out.println(text);
 					dispose();
+					userDictionary.show();
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -71,36 +87,38 @@ public class CustomDictionary extends JFrame {
 			}
 		});
 		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBackground(new Color(0, 153, 153));
+		btnNewButton.setFont(new Font("Urdu Typesetting", Font.BOLD, 13));
+		btnNewButton.setBackground(Color.WHITE);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(80)
-					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-					.addGap(10)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-					.addGap(5))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(156)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-					.addGap(179))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(131)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 171, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+					.addGap(36)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(36)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(26)
-							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-							.addGap(56)))
-					.addGap(33)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(45))
+							.addContainerGap()
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(41)
+							.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
+					.addGap(32)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+					.addGap(205))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
 	}
 }

@@ -118,6 +118,17 @@ public class Login extends JFrame {
 		});
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		
+		JButton btnNewButton_1 = new JButton("واپس جاو");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserOptions userOptions = new UserOptions();
+				dispose();
+				userOptions.show();
+			}
+		});
+		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		btnNewButton_1.setBackground(Color.WHITE);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -131,16 +142,19 @@ public class Login extends JFrame {
 					.addGap(10)
 					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
 					.addGap(60))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel_1_1, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-					.addGap(10)
-					.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(60)
+							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+							.addGap(54)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblNewLabel_1_1, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+							.addGap(10)
+							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)))
 					.addGap(60))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(159)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-					.addGap(176))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -163,11 +177,14 @@ public class Login extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
 							.addGap(5)))
-					.addGap(34)
-					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-					.addGap(26))
+					.addGap(30)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(2)
+							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGap(30))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
 }
