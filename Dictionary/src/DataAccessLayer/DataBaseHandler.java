@@ -123,7 +123,7 @@ public class DataBaseHandler implements IDBHandler{
           	listOfRoots=getRoots(mashkool);
           	for(int j=0;j<listOfRoots.size();j++)
           	{
-          		String insertQueryForRootTable="INSERT INTO `roottable`(`مشكول`, `روٹ`) VALUES ('"+mashkool+"','"+listOfRoots.get(j)+"');";
+          		String insertQueryForRootTable="INSERT INTO `roottable`(`روٹ`) VALUES ('"+listOfRoots.get(j)+"');";
               	preparedStatement = con.prepareStatement(insertQueryForRootTable);
               	String queryTogetRootID="SELECT 	`رقم` FROM `roottable` WHERE `روٹ`='"+listOfRoots.get(j)+"';";
           		statement =con.createStatement();
@@ -316,8 +316,11 @@ public class DataBaseHandler implements IDBHandler{
 	public ArrayList<String []> returnListOfMashkoolAgainstRoot(String root) throws SQLException
 	{
 		Connection con = DataBaseConnection.getConnection();
-		String queryToFetchDataFromRootTable="SELECT `مشكول` FROM `roottable` WHERE `روٹ` LIKE +'"+root+"';";
+		///String queryToFetchDataFromRootTable="SELECT `مشكول` FROM `roottable` WHERE `روٹ` LIKE +'"+root+"';";
 		//String selectQry="SELECT * FROM `لغت` WHERE `مشكول` IN ("+queryToFetchDataFromRootTable+";);";
+		String queryToFetchDataFromRootTable="SELECT `مشكول` FROM `لغت` WHERE `رقم` IN\r\n"
+				+ "( SELECT `ID` FROM `rootfktable` WHERE `rootid` IN\r\n"
+				+ " (SELECT `رقم` FROM `roottable` WHERE `روٹ` LIKE '"+root+"'))";
 		Statement statement=con.createStatement();
     	ResultSet rs = statement.executeQuery(queryToFetchDataFromRootTable);
     	ArrayList<String []> listOfWords=new ArrayList<String []>();
@@ -353,7 +356,8 @@ public class DataBaseHandler implements IDBHandler{
 	public ArrayList<String> getRootsuggestions(String word) throws SQLException
 	{
 		Connection con = DataBaseConnection.getConnection();
-		String query="SELECT `روٹ` FROM `roottable` WHERE `مشكول` LIKE '"+word+"';";
+		//String query="SELECT `روٹ` FROM `roottable` WHERE `مشكول` LIKE '"+word+"';";
+		String query="SELECT `روٹ` FROM `roottable` where `رقم` IN (SELECT `rootid` FROM `rootfktable` WHERE `id` IN   (SELECT `رقم` FROM `لغت` WHERE `مشكول` LIKE '"+word+"'))";
 		Statement statement=con.createStatement();
     	ResultSet rs = statement.executeQuery(query);
     	ArrayList<String> roots=new ArrayList<String>();

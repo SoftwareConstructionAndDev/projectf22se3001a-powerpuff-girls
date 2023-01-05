@@ -96,12 +96,12 @@ public class MashkoolAgainstRoot extends JFrame {
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"روٹ", "عربی سے اردو", "اردو سے عربی"}));
-		comboBox.setFont(new Font("Tahoma", Font.BOLD, 13));
-		comboBox.setBackground(new Color(0, 153, 153));
+		comboBox.setFont(new Font("Urdu Typesetting", Font.BOLD, 16));
+		comboBox.setBackground(Color.WHITE);
 		
 		JLabel lblNewLabel = new JLabel("لفظ درج کریں");
-		lblNewLabel.setForeground(new Color(0, 153, 153));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Urdu Typesetting", Font.BOLD, 13));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -163,13 +163,13 @@ public class MashkoolAgainstRoot extends JFrame {
 			}
 		});
 		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBackground(new Color(0, 153, 153));
+		btnNewButton.setFont(new Font("Urdu Typesetting", Font.BOLD, 13));
+		btnNewButton.setBackground(Color.WHITE);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("مشكول");
-		lblNewLabel_1.setForeground(new Color(0, 153, 153));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Urdu Typesetting", Font.BOLD, 13));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
